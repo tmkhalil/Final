@@ -1,0 +1,41 @@
+<h1>Listing sales</h1>
+
+
+
+<%= form_tag(sales_path, :method => :get,:id => 'cities_form') do %>
+<ul>
+
+<li> <%= check_box_tag  "Aswan",1,:id => 'cities_Aswan'  %> Aswan  </li>
+<li> <%= check_box_tag  "Alex",1,:id => 'cities_Alex'  %> Alex  </li>
+<li> <%= check_box_tag  "Cairo",1,:id => 'cities_Cairo'  %> Cairo  </li>
+<li> <%= check_box_tag  "Mansoura",1,:id => 'cities_Mansoura'  %> Mansoura  </li>
+</ul>
+<%= submit_tag("Filter",:id => 'cities_submit') %>
+<%end %>
+
+
+<table>
+  <tr>
+    <th>Good</th>
+    <th>Price</th>
+    <th>Date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sales.each do |sale| %>
+  <tr>
+    <td><%= sale.good %></td>
+    <td><%= sale.price %></td>
+    <td><%= sale.date %></td>
+    <td><%= link_to 'Show', sale %></td>
+    <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
+    <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sale', new_sale_path %>
